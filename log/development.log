@@ -11989,3 +11989,482 @@ Completed 200 OK in 9ms (Views: 6.0ms | ActiveRecord: 0.5ms | Allocations: 9844)
   [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mTweet Load (0.7ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mTwitterAccount Load (0.5ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Started GET "/" for 127.0.0.1 at 2022-07-05 15:16:28 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MainController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.html.erb within layouts/application
+  Rendered main/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 689)
+  Rendered shared/_navbar.html.erb (Duration: 1.3ms | Allocations: 991)
+  Rendered shared/_flash.html.erb (Duration: 0.4ms | Allocations: 230)
+  Rendered layout layouts/application.html.erb (Duration: 37.0ms | Allocations: 36733)
+Completed 200 OK in 59ms (Views: 39.3ms | ActiveRecord: 2.6ms | Allocations: 52623)
+
+
+Started GET "/tweets" for 127.0.0.1 at 2022-07-05 15:16:30 +0530
+Processing by TweetsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:4
+  [1m[36mCACHE TwitterAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:9
+  [1m[36mTweet Load (0.7ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/index.html.erb:13
+  [1m[36mTwitterAccount Load (0.1ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  [1m[36mCACHE TwitterAccount Load (0.0ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  Rendered collection of tweets/_tweet.html.erb [2 times] (Duration: 8.4ms | Allocations: 8362)
+  Rendered tweets/index.html.erb within layouts/application (Duration: 24.3ms | Allocations: 21575)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | Allocations: 492)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 27.0ms | Allocations: 24532)
+Completed 200 OK in 41ms (Views: 23.2ms | ActiveRecord: 4.9ms | Allocations: 32068)
+
+
+Started GET "/tweets/5/edit" for 127.0.0.1 at 2022-07-05 15:16:33 +0530
+Processing by TweetsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  [1m[36mTweet Load (0.1ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1 AND "tweets"."id" = $2 LIMIT $3[0m  [["user_id", 4], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tweets_controller.rb:45:in `set_tweet'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/edit.html.erb within layouts/application
+  Rendered tweets/_form.html.erb (Duration: 7.8ms | Allocations: 2247)
+  Rendered tweets/edit.html.erb within layouts/application (Duration: 8.4ms | Allocations: 2498)
+  Rendered layout layouts/application.html.erb (Duration: 8.5ms | Allocations: 2578)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.3ms | Allocations: 4297)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with model: tweet do |form| %>
+  <%= render "shared/form_errors", form: form %>
+
+  <div class="mb-3">
+    <%= form.label :twitter_account_id %>
+    <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+    <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :body %>
+    <%= form.text_area :body, class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :publish_at %>
+    <div class ="form-control">
+      <%= form.datetime_select :publish_at%>
+    </div>
+  </div>
+
+  <%= form.button"Schedule", class: "btn btn-primary"%>
+  
+<%= form_with model: @tweet do |form| %>
+  <% if form.object.persisted? %>
+  <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+<%end%>
+<%end%>> 
+):
+1:    <%= form_with model: tweet do |form| %>
+2:      <%= render "shared/form_errors", form: form %>
+3:    
+4:      <div class="mb-3">
+5:        <%= form.label :twitter_account_id %>
+6:        <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+7:        <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+8:      </div>
+9:    
+10:      <div class="mb-3">
+11:        <%= form.label :body %>
+12:        <%= form.text_area :body, class:"form-control" %>
+13:      </div>
+14:    
+15:      <div class="mb-3">
+16:        <%= form.label :publish_at %>
+17:        <div class ="form-control">
+18:          <%= form.datetime_select :publish_at%>
+19:        </div>
+20:      </div>
+21:    
+22:      <%= form.button"Schedule", class: "btn btn-primary"%>
+23:      
+24:    <%= form_with model: @tweet do |form| %>
+25:      <% if form.object.persisted? %>
+26:      <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+27:    <%end%>
+28:    <%end%>> 
+  
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/edit.html.erb:3
+Started GET "/tweets/5/edit" for 127.0.0.1 at 2022-07-05 15:17:01 +0530
+Processing by TweetsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  [1m[36mTweet Load (0.1ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1 AND "tweets"."id" = $2 LIMIT $3[0m  [["user_id", 4], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tweets_controller.rb:45:in `set_tweet'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/edit.html.erb within layouts/application
+  Rendered tweets/_form.html.erb (Duration: 1.1ms | Allocations: 1507)
+  Rendered tweets/edit.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1761)
+  Rendered layout layouts/application.html.erb (Duration: 2.0ms | Allocations: 1841)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.4ms | Allocations: 4077)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with model: tweet do |form| %>
+  <%= render "shared/form_errors", form: form %>
+
+  <div class="mb-3">
+    <%= form.label :twitter_account_id %>
+    <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+    <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :body %>
+    <%= form.text_area :body, class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :publish_at %>
+    <div class ="form-control">
+      <%= form.datetime_select :publish_at%>
+    </div>
+  </div>
+
+  <%= form.button"Schedule", class: "btn btn-primary"%>
+  
+<%= form_with model: @tweet do |form| %>
+  <% if form.object.persisted? %>
+  <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+<%end%>
+<%end%>
+):
+1:    <%= form_with model: tweet do |form| %>
+2:      <%= render "shared/form_errors", form: form %>
+3:    
+4:      <div class="mb-3">
+5:        <%= form.label :twitter_account_id %>
+6:        <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+7:        <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+8:      </div>
+9:    
+10:      <div class="mb-3">
+11:        <%= form.label :body %>
+12:        <%= form.text_area :body, class:"form-control" %>
+13:      </div>
+14:    
+15:      <div class="mb-3">
+16:        <%= form.label :publish_at %>
+17:        <div class ="form-control">
+18:          <%= form.datetime_select :publish_at%>
+19:        </div>
+20:      </div>
+21:    
+22:      <%= form.button"Schedule", class: "btn btn-primary"%>
+23:      
+24:    <%= form_with model: @tweet do |form| %>
+25:      <% if form.object.persisted? %>
+26:      <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+27:    <%end%>
+28:    <%end%>
+  
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/edit.html.erb:3
+Started GET "/" for 127.0.0.1 at 2022-07-05 15:17:25 +0530
+Processing by MainController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.html.erb within layouts/application
+  Rendered main/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 366)
+  Rendered shared/_navbar.html.erb (Duration: 1.4ms | Allocations: 909)
+  Rendered shared/_flash.html.erb (Duration: 0.6ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | Allocations: 4279)
+Completed 200 OK in 12ms (Views: 9.1ms | ActiveRecord: 0.7ms | Allocations: 5597)
+
+
+Started GET "/tweets" for 127.0.0.1 at 2022-07-05 15:17:26 +0530
+Processing by TweetsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:4
+  [1m[36mCACHE TwitterAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:9
+  [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/index.html.erb:13
+  [1m[36mTwitterAccount Load (0.1ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  [1m[36mCACHE TwitterAccount Load (0.0ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  Rendered collection of tweets/_tweet.html.erb [2 times] (Duration: 2.5ms | Allocations: 1888)
+  Rendered tweets/index.html.erb within layouts/application (Duration: 7.2ms | Allocations: 4237)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | Allocations: 492)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 7176)
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 0.9ms | Allocations: 8085)
+
+
+Started GET "/tweets/5/edit" for 127.0.0.1 at 2022-07-05 15:17:28 +0530
+Processing by TweetsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  [1m[36mTweet Load (0.3ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1 AND "tweets"."id" = $2 LIMIT $3[0m  [["user_id", 4], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tweets_controller.rb:45:in `set_tweet'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/edit.html.erb within layouts/application
+  Rendered tweets/_form.html.erb (Duration: 1.1ms | Allocations: 1504)
+  Rendered tweets/edit.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1581)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | Allocations: 1661)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms | Allocations: 3219)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with model: tweet do |form| %>
+  <%= render "shared/form_errors", form: form %>
+
+  <div class="mb-3">
+    <%= form.label :twitter_account_id %>
+    <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+    <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :body %>
+    <%= form.text_area :body, class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :publish_at %>
+    <div class ="form-control">
+      <%= form.datetime_select :publish_at%>
+    </div>
+  </div>
+
+  <%= form.button"Schedule", class: "btn btn-primary"%>
+  
+<%= form_with model: @tweet do |form| %>
+  <% if form.object.persisted? %>
+  <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+<%end%>
+<%end%>
+):
+1:    <%= form_with model: tweet do |form| %>
+2:      <%= render "shared/form_errors", form: form %>
+3:    
+4:      <div class="mb-3">
+5:        <%= form.label :twitter_account_id %>
+6:        <%= form.collection_select :twitter_account_id, Current.user.twitter_accounts, :id, :username, {}, { class: "form-control"} %>
+7:        <%= link_to "Connect your Twitter Account", "/auth/twitter"%>
+8:      </div>
+9:    
+10:      <div class="mb-3">
+11:        <%= form.label :body %>
+12:        <%= form.text_area :body, class:"form-control" %>
+13:      </div>
+14:    
+15:      <div class="mb-3">
+16:        <%= form.label :publish_at %>
+17:        <div class ="form-control">
+18:          <%= form.datetime_select :publish_at%>
+19:        </div>
+20:      </div>
+21:    
+22:      <%= form.button"Schedule", class: "btn btn-primary"%>
+23:      
+24:    <%= form_with model: @tweet do |form| %>
+25:      <% if form.object.persisted? %>
+26:      <%= button_to "Delete", form.object, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+27:    <%end%>
+28:    <%end%>
+  
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/_form.html.erb:30: syntax error, unexpected end-of-input, expecting `end'
+app/views/tweets/edit.html.erb:3
+Started GET "/" for 127.0.0.1 at 2022-07-05 15:18:24 +0530
+Processing by MainController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.html.erb within layouts/application
+  Rendered main/index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 367)
+  Rendered shared/_navbar.html.erb (Duration: 0.9ms | Allocations: 909)
+  Rendered shared/_flash.html.erb (Duration: 0.3ms | Allocations: 215)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 4278)
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.1ms | Allocations: 5774)
+
+
+Started GET "/tweets" for 127.0.0.1 at 2022-07-05 15:18:26 +0530
+Processing by TweetsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:4
+  [1m[36mCACHE TwitterAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:9
+  [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/index.html.erb:13
+  [1m[36mTwitterAccount Load (0.2ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  [1m[36mCACHE TwitterAccount Load (0.0ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  Rendered collection of tweets/_tweet.html.erb [2 times] (Duration: 2.7ms | Allocations: 1888)
+  Rendered tweets/index.html.erb within layouts/application (Duration: 6.8ms | Allocations: 4239)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 492)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 9.0ms | Allocations: 7178)
+Completed 200 OK in 12ms (Views: 9.2ms | ActiveRecord: 0.8ms | Allocations: 8531)
+
+
+Started GET "/tweets/5/edit" for 127.0.0.1 at 2022-07-05 15:18:27 +0530
+Processing by TweetsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1 AND "tweets"."id" = $2 LIMIT $3[0m  [["user_id", 4], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tweets_controller.rb:45:in `set_tweet'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/edit.html.erb within layouts/application
+  Rendered shared/_form_errors.html.erb (Duration: 0.2ms | Allocations: 201)
+  [1m[36mTwitterAccount Load (0.2ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/_form.html.erb:6
+  Rendered tweets/_form.html.erb (Duration: 12.0ms | Allocations: 13585)
+  Rendered tweets/edit.html.erb within layouts/application (Duration: 12.7ms | Allocations: 13830)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 461)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 29)
+  Rendered layout layouts/application.html.erb (Duration: 14.7ms | Allocations: 16633)
+Completed 200 OK in 18ms (Views: 14.8ms | ActiveRecord: 0.5ms | Allocations: 18263)
+
+
+Started DELETE "/tweets/5" for 127.0.0.1 at 2022-07-05 15:18:29 +0530
+Processing by TweetsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1 AND "tweets"."id" = $2 LIMIT $3[0m  [["user_id", 4], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tweets_controller.rb:45:in `set_tweet'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tweets_controller.rb:34:in `destroy'
+  [1m[36mTweet Destroy (0.2ms)[0m  [1m[31mDELETE FROM "tweets" WHERE "tweets"."id" = $1[0m  [["id", 5]]
+  ↳ app/controllers/tweets_controller.rb:34:in `destroy'
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tweets_controller.rb:34:in `destroy'
+Redirected to http://127.0.0.1:3000/tweets
+Completed 302 Found in 13ms (ActiveRecord: 7.1ms | Allocations: 3125)
+
+
+Started GET "/tweets" for 127.0.0.1 at 2022-07-05 15:18:29 +0530
+Processing by TweetsController#index as TURBO_STREAM
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:4
+  [1m[36mCACHE TwitterAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:9
+  [1m[36mTweet Load (0.1ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/index.html.erb:13
+  [1m[36mTwitterAccount Load (0.1ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  Rendered collection of tweets/_tweet.html.erb [1 times] (Duration: 1.2ms | Allocations: 889)
+  Rendered tweets/index.html.erb within layouts/application (Duration: 4.2ms | Allocations: 2953)
+  Rendered shared/_navbar.html.erb (Duration: 0.5ms | Allocations: 464)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | Allocations: 35)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | Allocations: 5790)
+Completed 200 OK in 9ms (Views: 7.3ms | ActiveRecord: 0.5ms | Allocations: 6676)
+
+
+Started GET "/twitter_accounts" for 127.0.0.1 at 2022-07-05 15:19:25 +0530
+Processing by TwitterAccountsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering twitter_accounts/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Load (0.3ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/twitter_accounts/index.html.erb:4
+  Rendered twitter_accounts/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1408)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 484)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 4323)
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 0.4ms | Allocations: 5775)
+
+
+Started GET "/about" for 127.0.0.1 at 2022-07-05 15:19:28 +0530
+Processing by AboutController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.html.erb within layouts/application
+  Rendered about/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 117)
+  Rendered shared/_navbar.html.erb (Duration: 0.7ms | Allocations: 519)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | Allocations: 3088)
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.1ms | Allocations: 4437)
+
+
+Started GET "/twitter_accounts" for 127.0.0.1 at 2022-07-05 15:19:29 +0530
+Processing by TwitterAccountsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering twitter_accounts/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Load (0.1ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/twitter_accounts/index.html.erb:4
+  Rendered twitter_accounts/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 1115)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 462)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | Allocations: 29)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | Allocations: 3931)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.2ms | Allocations: 4767)
+
+
+Started GET "/tweets" for 127.0.0.1 at 2022-07-05 15:19:30 +0530
+Processing by TweetsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering tweets/index.html.erb within layouts/application
+  [1m[36mTwitterAccount Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:4
+  [1m[36mCACHE TwitterAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "twitter_accounts" WHERE "twitter_accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/views/tweets/index.html.erb:9
+  [1m[36mTweet Load (0.2ms)[0m  [1m[34mSELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/views/tweets/index.html.erb:13
+  [1m[36mTwitterAccount Load (0.2ms)[0m  [1m[34mSELECT "twitter_accounts".* FROM "twitter_accounts" WHERE "twitter_accounts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tweets/_tweet.html.erb:4
+  Rendered collection of tweets/_tweet.html.erb [1 times] (Duration: 1.5ms | Allocations: 889)
+  Rendered tweets/index.html.erb within layouts/application (Duration: 4.6ms | Allocations: 2903)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | Allocations: 464)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | Allocations: 29)
+  Rendered layout layouts/application.html.erb (Duration: 6.8ms | Allocations: 5734)
+Completed 200 OK in 9ms (Views: 6.5ms | ActiveRecord: 0.8ms | Allocations: 6570)
+
+
